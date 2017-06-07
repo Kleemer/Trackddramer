@@ -17,8 +17,9 @@ render((
 <Provider store={store}>
   <div>
     <Router history={history} >
-      <Route path="/" component={Home}/>
-      <Route path="/shows" component={Shows} />
+      <Route path="/" component={Home}>
+        <Route path="/shows" component={Shows} />
+      </Route>
     </Router>
   <DevTools />
 </div>

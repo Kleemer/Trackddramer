@@ -15,6 +15,7 @@ class Home extends Component {
             <div>
                 <Nav changeLoginValue={ () => this.changeLoginValue() } loginButton={this.props.loginButton} />
                 <p> Welcome to TrackdrammerV2 </p>
+                {this.props.children}
             </div>
         );
     }
