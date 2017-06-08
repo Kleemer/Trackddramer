@@ -2674,7 +2674,7 @@ globby@^5.0.0:
     pify "^2.0.0"
     pinkie-promise "^2.0.0"
 
-got@^5.0.0:
+got@^5.0.0, got@^5.1.0:
   version "5.7.1"
   resolved "https://registry.yarnpkg.com/got/-/got-5.7.1.tgz#5f81635a61e4a6589f180569ea4e381680a51f35"
   dependencies:
@@ -5941,6 +5941,13 @@ trakt-api@^0.4.1:
     norma "^0.3.0"
     request "^2.55.0"
     winston "^1.0.0"
+
+traktapi2@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/traktapi2/-/traktapi2-1.4.0.tgz#1e241870dcd30601a3be3f0e2efa959e24927011"
+  dependencies:
+    got "^5.1.0"
+    pinkie-promise "^2.0.0"
 
 trim-newlines@^1.0.0:
   version "1.0.0"
