@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { login, fetchLoginWithTrakt } from '../actions'
+import { login, logout, fetchSearchResults } from '../actions'
 
 import Nav from '../components/Nav'
 
@@ -8,15 +8,19 @@ class Home extends Component {
 
     changeLoginValue() {
         if (this.props.loginButton === 'login')
-            this.props.dispatch(fetchLoginWithTrakt())
+            this.props.dispatch(logout())
         else
             this.props.dispatch(login())
+    }
+
+    fetchSearch(text) {
+        this.props.dispatch(fetchSearchResults(text))
     }
 
     render() {
         return (
             <div>
-                <Nav changeLoginValue={ () => this.changeLoginValue() } loginButton={this.props.loginButton} authUrl={this.props.authUrl}/>
+                <Nav fetchSearch={ (text) => this.fetchSearch(text) } changeLoginValue={ () => this.changeLoginValue() } loginButton={this.props.loginButton}/>
                 <p> Welcome to TrackdrammerV2 </p>
                 {this.props.children}
             </div>

@@ -1,4 +1,5 @@
 import * as types from '../types'
+import { browserHistory } from 'react-router'
 
 const API_ROOT = 'https://api.trakt.tv/'
 const API_KEY = "abb63a0caac4b0e578a0fb975c3ea64ec23617444587c43b0e03775ccbe76c73"
@@ -36,15 +37,24 @@ export const fetchLoginWithTrakt = () => (dispatch) => {
   dispatch(getAuthUrl(url));
 }
 
-export function getTrendingTVShows(tvshows) {
+export function fetchSearchRequest() {
   return {
-    type: types.GET_TRENDING_TV_SHOWS,
+    type: types.FETCH_SEARCH_REQUEST,
+    payload: null
+  }
+}
+
+export function fetchSearchSuccess(tvshows) {
+  return {
+    type: types.FETCH_SEARCH_SUCCESS,
     payload: tvshows
   }
 }
 
-export const fetchTrendingShows = (dispatch) => {
-  fetch(`${API_ROOT}shows/trending`, { method: 'GET', headers: new Headers({
+export const fetchSearchResults = (text) => (dispatch) => {
+  browserHistory.push('/shows');  
+  dispatch(fetchSearchRequest());
+  fetch(`${API_ROOT}search/show?query=${text.replace(/ /g,"+")}`, { method: 'GET', headers: new Headers({
                                                                "Content-Type": "application/json",
                                                                "trakt-api-version": 2,
                                                                "trakt-api-key": API_KEY,
@@ -52,17 +62,10 @@ export const fetchTrendingShows = (dispatch) => {
                                      }
      )
     .then(raw => raw.json())
-    .then(tvshows => dispatch(getTrendingTVShows(tvshows)))
+    .then(tvshows => dispatch(fetchSearchSuccess(tvshows)))
 }
 
-export function getTVShow(tvshow) {
-  return {
-    type: types.GET_TV_SHOW,
-    payload: tvshow
-  }
-}
-
-export const fetchTVShow = (id, type) => (dispatch) => {
+/*export const fetchTVShow = (id, type) => (dispatch) => {
   fetch(`${API_ROOT}search/${type}/${id}?type=show`, { method: 'GET', headers: new Headers({
                                                                "Content-Type": "application/json",
                                                                "trakt-api-version": 2,
@@ -72,4 +75,4 @@ export const fetchTVShow = (id, type) => (dispatch) => {
      )
     .then(raw => raw.json())
     .then(tvshow => dispatch(getTVShow(tvshow)))
-}
+}*/
