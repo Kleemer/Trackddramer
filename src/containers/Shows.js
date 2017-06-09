@@ -1,17 +1,28 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-//import { fetchTVShow } from '../actions'
+import { fetchPrevSearchResults, fetchNextSearchResults } from '../actions'
 
-import TVShow from '../components/TVShow'
+import SearchResult from '../components/SearchResult'
 
 class Shows extends Component {
+
+    fetchPrev() {
+        this.props.dispatch(fetchPrevSearchResults(this.props.page, this.props.request))
+    }
+
+    fetchNext() {
+        this.props.dispatch(fetchNextSearchResults(this.props.page, this.props.request))
+    }
     render() {
         return (
             <div>
                 <p> Shows </p>
-                <TVShow page={this.props.page} payload={this.props.payload}/>
+                <SearchResult page={this.props.page} payload={this.props.payload} message={this.props.message}/>
+                {this.props.page > 1 &&
+                  <button onClick={() => this.fetchPrev()}>Previous page</button>
+                }                
                 {this.props.page > 0 &&
-                  <button>Next page</button>
+                  <button onClick={() => this.fetchNext()}>Next page</button>
                 }
             </div>
         );
@@ -23,7 +34,9 @@ function mapStateToProps(state) {
 
     return {
         page: shows.page,
-        payload: shows.payload
+        payload: shows.payload,
+        message: shows.message,
+        request: shows.request
     }
 }
 

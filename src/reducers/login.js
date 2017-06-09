@@ -1,24 +1,16 @@
 import * as types from '../types';
 
-export default function loginReducer(state = {loginButton : 'login', authUrl : ''}, action) {
+export default function loginReducer(state = {loginButton : 'login'}, action) {
     switch (action.type) {
         case types.LOGIN:
         return {
             ...state,
-            loginButton: 'logout',
-            authUrl: state.authUrl
+            loginButton: 'logout'
         };
         case types.LOGOUT:
         return {
             ...state,
-            loginButton: 'login',
-            authUrl: state.authUrl
-        };
-        case types.GET_ACCESS_TOKEN:
-         return {
-            ...state,
-            loginButton: state.loginButton,
-            access_token: action.body.access_token
+            loginButton: 'login'
         };
         default:
         return state;

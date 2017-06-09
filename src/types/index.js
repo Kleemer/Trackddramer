@@ -1,6 +1,5 @@
 export const LOGIN = 'LOGIN'
 export const LOGOUT = 'LOGOUT'
-export const GET_ACCESS_TOKEN = 'GET_ACCESS_TOKEN'
 
 export const GET_TV_SHOW = 'GET_TV_SHOW'
 export const FETCH_SEARCH_REQUEST = 'FETCH_SEARCH_REQUEST'
