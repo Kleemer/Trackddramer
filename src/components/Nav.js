@@ -16,7 +16,7 @@ export default class Nav extends Component {
     }
 
     handleSubmit(event) {
-        fetchSearchResults(this.state.value);
+        fetchSearchResults(this.props.page, this.state.value);
         alert('search: ' + this.state.value);
         event.preventDefault();
     }

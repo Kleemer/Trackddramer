@@ -14,11 +14,11 @@ export default function loginReducer(state = {loginButton : 'login', authUrl : '
             loginButton: 'login',
             authUrl: state.authUrl
         };
-        case types.GET_AUTH_URL:
+        case types.GET_ACCESS_TOKEN:
          return {
             ...state,
             loginButton: state.loginButton,
-            authUrl: action.authUrl
+            access_token: action.body.access_token
         };
         default:
         return state;

@@ -22,6 +22,7 @@
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
     "trakt-api": "^0.4.1",
+    "trakt.tv": "^5.0.1",
     "traktapi2": "^1.4.0"
   },
   "scripts": {

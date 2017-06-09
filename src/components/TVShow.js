@@ -4,27 +4,24 @@ export default class TVShow extends Component {
     
     renderTVShows() {
         var rows = [];
-        if (this.props.payload)
-            if (typeof this.props.payload === 'string')
-                rows.push(this.props.payload);
-            else
-                for (var obj of this.props.payload)
-                    rows.push(obj.show.title);
+        if (this.props.payload !== [])
+            for (var obj of this.props.payload)
+                rows.push(obj.show.title);
         return rows;
     }
 
     render() {
         return (
             <div>
+                <p>Page : { this.props.page }</p>
                 <ul>
                 {
-                    this.renderTVShows().map(function (list) {
-                            return <li key="list">{ list }</li>;
+                    this.renderTVShows().map(function (show, index) {
+                            return <li key={ index }>{ show }</li>;
                         }
                     )
                 }
                 </ul>
-                <button>Display TV Show</button>
             </div>
         );
     }
