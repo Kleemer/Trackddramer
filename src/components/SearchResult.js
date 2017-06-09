@@ -10,9 +10,15 @@ export default class SearchResult extends Component {
     renderTVShows() {
         var rows = [];
         for (var obj of this.props.payload)
-            rows.push(obj.show.title);
+            rows.push(obj.show);
         return rows;
     }
+
+    renderShow(show, index) {
+        var link = '/shows?imdb=' + show.ids.imdb;
+        return <li key={ index }><button onClick={() => this.props.saveShow(show)} >Save</button> <a href={link}>{ show.title }</a></li>;
+    }
+
 
     render() {
         return (
@@ -23,10 +29,7 @@ export default class SearchResult extends Component {
                 <p>Page : { this.props.page }</p>
                 <ul>
                 {
-                    this.renderTVShows().map(function (show, index) {
-                            return <li key={ index }>{ show }</li>;
-                        }
-                    )
+                    this.renderTVShows().map(this.renderShow, this)
                 }
                 </ul>
             </div>

@@ -1,35 +1,15 @@
 import * as types from '../types'
 
-export default function getTVShow (state = {request: null, message: 'Nothing to show', payload: [], page: 0}, action) {
+export default function showsReducer (state = {shows: [], selected: null}, action) {
     switch (action.type) {
-        case types.FETCH_SEARCH_REQUEST:
-        var newPage = state.request === action.request ? state.page : 0;
+        case types.SAVE_TV_SHOW:
         return {
             ...state,
-            page: newPage,
-            request: action.request,
-            message: "Loading"
+            shows: state.shows.concat(action.show)
         }
-        case types.FETCH_SEARCH_NEXT:
+        case types.GET_TV_SHOW:
         return {
-            ...state,
-            page: state.page + 1,
-            message: 'Results',
-            payload: action.payload
-        }
-        case types.FETCH_SEARCH_PREV:
-        return {
-            ...state,
-            page: state.page - 1,
-            message: 'Results',
-            payload: action.payload
-        }
-        case types.FETCH_SEARCH_FAIL:
-        return {
-            ...state,
-            message: 'No results anymore',
-            page: state.page + 1,
-            payload: []
+        ...state
         }
         default:
         return state

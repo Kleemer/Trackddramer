@@ -1,28 +1,36 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchPrevSearchResults, fetchNextSearchResults } from '../actions'
 
-import SearchResult from '../components/SearchResult'
+import Show from '../components/Show'
 
 class Shows extends Component {
 
-    fetchPrev() {
-        this.props.dispatch(fetchPrevSearchResults(this.props.page, this.props.request))
+    renderShow(show, index) {
+        var link = '/shows?imdb=' + show.ids.imdb;
+        return <li key={ index }><a href={link}>{ show.title }</a></li>;
     }
 
-    fetchNext() {
-        this.props.dispatch(fetchNextSearchResults(this.props.page, this.props.request))
+    renderList() {
+        var rows = [];
+         for (var obj of this.props.list)
+            rows.push(obj);
+        console.log(rows);
+        return rows;
     }
+
+    renderSpecific() {
+
+    }
+
     render() {
         return (
             <div>
                 <p> Shows </p>
-                <SearchResult page={this.props.page} payload={this.props.payload} message={this.props.message}/>
-                {this.props.page > 1 &&
-                  <button onClick={() => this.fetchPrev()}>Previous page</button>
-                }                
-                {this.props.page > 0 && this.props.message !== 'No results anymore' &&
-                  <button onClick={() => this.fetchNext()}>Next page</button>
+                {
+                    this.props.location.query ?
+                    this.renderList().map(this.renderShow)
+                    :
+                    this.renderSpecific()
                 }
             </div>
         );
@@ -33,10 +41,7 @@ function mapStateToProps(state) {
     const { shows } = state;
 
     return {
-        page: shows.page,
-        payload: shows.payload,
-        message: shows.message,
-        request: shows.request
+        list: shows.shows
     }
 }
 

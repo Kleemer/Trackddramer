@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router'
-
-import Login from './Login'
 
 export default class Nav extends Component {
     constructor(props) {
@@ -18,16 +15,11 @@ export default class Nav extends Component {
     render() {
         return (
             <div>
-                <Link to="/">Home</Link>
-                { ' ' }
-                <Link to="/shows">Shows</Link>
-                { ' ' }
                 <label>
-                    Search:
+                    Login:
                     <input type="text" value={this.state.value} onChange={this.handleChange} />
                 </label>
-                <button onClick={ () => this.props.fetchSearch(this.state.value) }>Search</button>
-                <Login changeLoginValue={() => this.props.changeLoginValue()} loginButton={this.props.loginButton}/>
+                <button onClick={ () => this.props.changeLoginValue() } > { this.props.loginButton }</button>
             </div>
         );
     }

@@ -8,6 +8,7 @@ import configureStore from './store/configureStore'
 
 import Home from './containers/Home'
 import Shows from './containers/Shows'
+import Results from './containers/Results'
 import DevTools from './containers/DevTools'
 
 const store = configureStore()
@@ -19,6 +20,7 @@ render((
     <Router history={history} >
       <Route path="/" component={Home}>
         <Route path="/shows" component={Shows} />
+        <Route path="/results" component={Results} />
       </Route>
     </Router>
   <DevTools />

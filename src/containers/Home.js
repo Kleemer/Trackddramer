@@ -8,9 +8,9 @@ class Home extends Component {
 
     changeLoginValue() {
         if (this.props.loginButton === 'login')
-            this.props.dispatch(logout())
-        else
             this.props.dispatch(login())
+        else
+            this.props.dispatch(logout())
     }
 
     fetchSearch(text) {
@@ -21,8 +21,6 @@ class Home extends Component {
         return (
             <div>
                 <Nav page={this.props.page} fetchSearch={ (text) => this.fetchSearch(text) } changeLoginValue={ () => this.changeLoginValue() } loginButton={this.props.loginButton}/>
-
-                <p> Welcome to TrackdrammerV2 </p>
                 {this.props.children}
             </div>
         );
@@ -30,10 +28,10 @@ class Home extends Component {
 }
 
 function mapStateToProps(state) {
-    const { login } = state;
+    const { user } = state;
 
     return {
-        loginButton: login.loginButton
+        loginButton: user.loginButton
     }
 }
 

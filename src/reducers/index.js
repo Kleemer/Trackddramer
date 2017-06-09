@@ -1,11 +1,13 @@
 import { routerReducer as routing } from 'react-router-redux'
 import { combineReducers } from 'redux'
 
-import login from './login'
+import user from './user'
+import results from './results'
 import shows from './shows'
 
 const rootReducer = combineReducers({
-  login,
+  user,
+  results,
   shows,
   routing
 })
