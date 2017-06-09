@@ -21,13 +21,14 @@ export default function getTVShow (state = {request: null, message: 'Nothing to 
         return {
             ...state,
             page: state.page - 1,
-            message: 'Page' + state.page - 1,
+            message: 'Results',
             payload: action.payload
         }
         case types.FETCH_SEARCH_FAIL:
         return {
             ...state,
             message: 'No results anymore',
+            page: state.page + 1,
             payload: []
         }
         default:

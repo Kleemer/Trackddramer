@@ -21,7 +21,7 @@ class Shows extends Component {
                 {this.props.page > 1 &&
                   <button onClick={() => this.fetchPrev()}>Previous page</button>
                 }                
-                {this.props.page > 0 &&
+                {this.props.page > 0 && this.props.message !== 'No results anymore' &&
                   <button onClick={() => this.fetchNext()}>Next page</button>
                 }
             </div>
