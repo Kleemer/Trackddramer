@@ -1,6 +1,6 @@
 import * as types from '../types';
 
-export default function loginReducer(state = {login: 'guest', loginButton : 'login'}, action) {
+export default function loginReducer(state = {login: 'guest', loginButton : 'login', shows: []}, action) {
     switch (action.type) {
         case types.LOGIN:
         return {
@@ -12,6 +12,11 @@ export default function loginReducer(state = {login: 'guest', loginButton : 'log
             ...state,
             loginButton: 'login'
         };
+        case types.SAVE_TV_SHOW:
+        return {
+            ...state,
+            shows: state.shows.concat(action.show)
+        }
         default:
         return state;
     }

@@ -38,10 +38,10 @@ class Shows extends Component {
 }
 
 function mapStateToProps(state) {
-    const { shows } = state;
+    const { user } = state;
 
     return {
-        list: shows.shows
+        list: user.shows
     }
 }
 
