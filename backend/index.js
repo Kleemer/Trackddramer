@@ -17,24 +17,24 @@ let connection = mysql.createConnection({
 
 connection.connect();
 
+app.get('/users', (req, res) => {
+    connection.query("SELECT * FROM `users`", (err, result) => {
+        if (err)
+            return res.status(500).send(err);
+        return res.status(200).send(result);
+    })
+})
+
 app.post('/user', (req, res) => {
     const { login } = req.body;
     if (!login)
         return res.sendStatus(500);
     connection.query("INSERT INTO `users` (login) VALUES (" + mysql.escape(login) + ")", (err, result) => {
     if (err)
-        return res.sendStatus(500);
+            return res.status(500).send(err);
     return res.sendStatus(200);
     })
 });
-
-app.get('/users', (req, res) => {
-    connection.query("SELECT * FROM `users`", (err, result) => {
-        if (err)
-            return err;
-        return res.status(200).send(result);
-    })
-})
 
 app.get('/user', (req, res) => {
     const { login } = req.query;
@@ -42,7 +42,15 @@ app.get('/user', (req, res) => {
         return res.sendStatus(500);
     connection.query("SELECT * FROM `users` WHERE login LIKE " + mysql.escape(login), (err, result) => {
         if (err)
-            return err;
+            return res.status(500).send(err);
+        return res.status(200).send(result);
+    })
+})
+
+app.get('/shows', (req, res) => {
+    connection.query("SELECT * FROM `shows`", (err, result) => {
+        if (err)
+            return res.status(500).send(err);
         return res.status(200).send(result);
     })
 })

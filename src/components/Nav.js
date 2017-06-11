@@ -20,7 +20,7 @@ export default class Nav extends Component {
             <div>
                 <Link to="/">Home</Link>
                 { ' ' }
-                <Link to="/shows">Shows</Link>
+                <Link to="/watchlists">Watchlists</Link>
                 { ' ' }
                 <label>
                     Search:

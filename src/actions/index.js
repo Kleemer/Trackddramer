@@ -32,6 +32,13 @@ export function saveShow(show) {
   }
 }
 
+export function fetchSearchSpecificRequest() {
+  return {
+    type: types.FETCH_SEARCH_SPECIFIC_REQUEST,
+    payload: null
+  }
+}
+
 export function fetchSearchRequest(request) {
   return {
     type: types.FETCH_SEARCH_REQUEST,
@@ -86,6 +93,19 @@ export const fetchLogin = (text) => (dispatch) => {
     })
 }
 
+export const fetchSpecificSearchResults = (id) => (dispatch) => {
+  dispatch(fetchSearchSpecificRequest());
+  fetch(`${API_ROOT}search/trakt/${id}?type=show&extended=full`, { method: 'GET', headers: new Headers({
+                                                               "Content-Type": "application/json",
+                                                               "trakt-api-version": 2,
+                                                               "trakt-api-key": API_KEY,
+                                                              })
+                                                            }
+     )
+    .then(raw => raw.json())
+    .then(tvshow => dispatch(fetchSearchSpecific(tvshow)))
+}
+
 export const fetchPrevSearchResults = (page, text) => (dispatch) => {
   browserHistory.push('/results');  
   dispatch(fetchSearchRequest(text));
@@ -102,18 +122,6 @@ export const fetchPrevSearchResults = (page, text) => (dispatch) => {
       :
       dispatch(fetchSearchFail())
     })
-}
-
-export const fetchSpecificSearchResults = (id) => (dispatch) => {
-  fetch(`${API_ROOT}search/trakt/${id}?type=show&extended=full`, { method: 'GET', headers: new Headers({
-                                                               "Content-Type": "application/json",
-                                                               "trakt-api-version": 2,
-                                                               "trakt-api-key": API_KEY,
-                                                              })
-                                                            }
-     )
-    .then(raw => raw.json())
-    .then(tvshow => dispatch(fetchSearchSpecific(tvshow)))
 }
 
 export const fetchNextSearchResults = (page, text, isPrev) => (dispatch) => {

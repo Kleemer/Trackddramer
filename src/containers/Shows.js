@@ -1,60 +1,47 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
 import { fetchSpecificSearchResults } from '../actions'
-
-import Show from '../components/Show'
 
 class Shows extends Component {
 
-    renderShow(show, index) {
-        var link = '/shows?trakt=' + show.ids.trakt;
-        return <li key={ index }><Link to={link}>{ show.title }</Link></li>;
+    componentWillMount() {
+        console.log("avant")
+        this.props.dispatch(fetchSpecificSearchResults(this.props.location.query.trakt))
+        console.log("apres")
     }
 
-    renderList() {
-        var rows = [];
-        for (var obj of this.props.list)
-           rows.push(obj.value);
-        return rows;
-    }
+    renderSpecific() {
+        console.log(this.props.isFetching)
+        if (this.props.isFetching)
+            return (
+                <div>
+                    <h1>Loading show</h1>
+                </div>
+            )
 
-    renderSpecific(show) {
-        if (show)
-            return <Show show={show.value}/>
-        
-        while (!show) {
-            this.props.dispatch(fetchSpecificSearchResults(this.props.location.query.trakt))
-            show = this.props.specific[0]
-            console.log(show)
-        }
-        return <Show show={show.show}/>
-    }
-
-    filterSpecific(element) {
-        return element.id == this.props.location.query.trakt
+        let show = this.props.specific[0].show;
+        return (
+            <div>
+                <h4>Show : {show.title} ({show.year})</h4>
+                {show.overview}
+            </div>
+        )
     }
 
     render() {
         return (
             <div>
-                <p> Shows </p>
-                {
-                    this.props.location.query.trakt ?
-                    this.renderSpecific(this.props.list.filter(this.filterSpecific, this)[0])
-                    :
-                    this.renderList().map(this.renderShow)
-                }
+                { this.renderSpecific() }
             </div>
         );
     }
 }
 
 function mapStateToProps(state) {
-    const { user, results } = state;
+    const { results } = state;
 
     return {
-        list: user.shows,
+        isFetching: results.isFetching,
         specific: results.payload
     }
 }

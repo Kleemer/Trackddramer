@@ -1,6 +1,13 @@
 import * as types from '../types';
 
-export default function loginReducer(state = {login: '', loginButton : 'login', shows: []}, action) {
+const initState = {
+    login: '',
+    loginButton : 'login',
+    shows: [],
+    watchlists: []
+}
+
+export default function loginReducer(state = initState, action) {
     switch (action.type) {
         case types.LOGIN:
         return {
