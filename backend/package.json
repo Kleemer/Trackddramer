@@ -1,0 +1,17 @@
+{
+  "name": "tp1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "cors": "^2.8.3",
+    "express": "^4.15.2",
+    "express-minify": "^0.2.0",
+    "mysql": "^2.13.0",
+    "nodemon": "^1.11.0"
+  }
+}
