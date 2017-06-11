@@ -1,15 +1,17 @@
 import * as types from '../types';
 
-export default function loginReducer(state = {login: 'guest', loginButton : 'login', shows: []}, action) {
+export default function loginReducer(state = {login: '', loginButton : 'login', shows: []}, action) {
     switch (action.type) {
         case types.LOGIN:
         return {
             ...state,
+            login: action.login,
             loginButton: 'logout'
         };
         case types.LOGOUT:
         return {
             ...state,
+            login: '',
             loginButton: 'login'
         };
         case types.SAVE_TV_SHOW:

@@ -27,7 +27,7 @@ export default class Nav extends Component {
                     <input type="text" value={this.state.value} onChange={this.handleChange} />
                 </label>
                 <button onClick={ () => this.props.fetchSearch(this.state.value) }>Search</button>
-                <Login changeLoginValue={() => this.props.changeLoginValue()} loginButton={this.props.loginButton}/>
+                <Login login={this.props.login} changeLoginValue={(login) => this.props.changeLoginValue(login)} loginButton={this.props.loginButton}/>
             </div>
         );
     }

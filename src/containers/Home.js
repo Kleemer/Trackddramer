@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { login, logout, fetchNextSearchResults } from '../actions'
+import { fetchLogin, logout, fetchNextSearchResults } from '../actions'
 
 import Nav from '../components/Nav'
 
 class Home extends Component {
 
-    changeLoginValue() {
+    changeLoginValue(login) {
         if (this.props.loginButton === 'login')
-            this.props.dispatch(login())
+            this.props.dispatch(fetchLogin(login))
         else
             this.props.dispatch(logout())
     }
@@ -20,7 +20,7 @@ class Home extends Component {
     render() {
         return (
             <div>
-                <Nav page={this.props.page} fetchSearch={ (text) => this.fetchSearch(text) } changeLoginValue={ () => this.changeLoginValue() } loginButton={this.props.loginButton}/>
+                <Nav login={this.props.login} page={this.props.page} fetchSearch={ (text) => this.fetchSearch(text) } changeLoginValue={ (login) => this.changeLoginValue(login) } loginButton={this.props.loginButton}/>
                 {this.props.children}
             </div>
         );
@@ -31,6 +31,7 @@ function mapStateToProps(state) {
     const { user } = state;
 
     return {
+        login: user.login,
         loginButton: user.loginButton
     }
 }

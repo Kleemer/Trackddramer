@@ -17,9 +17,14 @@ export default class Nav extends Component {
             <div>
                 <label>
                     Login:
-                    <input type="text" value={this.state.value} onChange={this.handleChange} />
                 </label>
-                <button onClick={ () => this.props.changeLoginValue() } > { this.props.loginButton }</button>
+                {
+                this.props.login === '' ?
+                <input type="text" value={this.state.value} onChange={this.handleChange} />
+                :
+                this.props.login
+                }
+                <button onClick={ () => this.props.changeLoginValue(this.state.value) } > { this.props.loginButton }</button>
             </div>
         );
     }
