@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router'
 
 export default class SearchResult extends Component {
     
@@ -15,8 +16,8 @@ export default class SearchResult extends Component {
     }
 
     renderShow(show, index) {
-        var link = '/shows?imdb=' + show.ids.imdb;
-        return <li key={ index }><button onClick={() => this.props.saveShow(show)} >Save</button> <a href={link}>{ show.title }</a></li>;
+        var link = '/shows?trakt=' + show.ids.trakt;
+        return <li key={ index }><button onClick={() => this.props.saveShow(show)} >Save</button> <Link to={link}>{ show.title }</Link></li>;
     }
 
 

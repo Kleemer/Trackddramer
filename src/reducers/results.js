@@ -24,6 +24,11 @@ export default function resultsReducer (state = {request: null, message: 'Nothin
             message: 'Results',
             payload: action.payload
         }
+        case types.FETCH_SEARCH_SPECIFIC:
+        return {
+            ...state,
+            payload: action.payload
+        }
         case types.FETCH_SEARCH_FAIL:
         return {
             ...state,

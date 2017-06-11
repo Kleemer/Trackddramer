@@ -52,6 +52,13 @@ export function fetchSearchPrev(tvshows) {
   }
 }
 
+export function fetchSearchSpecific(show) {
+  return {
+    type: types.FETCH_SEARCH_SPECIFIC,
+    payload: show
+  }
+}
+
 export function fetchSearchFail() {
   return {
     type: types.FETCH_SEARCH_FAIL
@@ -74,6 +81,18 @@ export const fetchPrevSearchResults = (page, text) => (dispatch) => {
       :
       dispatch(fetchSearchFail())
     })
+}
+
+export const fetchSpecificSearchResults = (id) => (dispatch) => {
+  fetch(`${API_ROOT}search/trakt/${id}?type=show&extended=full`, { method: 'GET', headers: new Headers({
+                                                               "Content-Type": "application/json",
+                                                               "trakt-api-version": 2,
+                                                               "trakt-api-key": API_KEY,
+                                                              })
+                                                            }
+     )
+    .then(raw => raw.json())
+    .then(tvshow => dispatch(fetchSearchSpecific(tvshow)))
 }
 
 export const fetchNextSearchResults = (page, text, isPrev) => (dispatch) => {

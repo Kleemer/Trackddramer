@@ -13,10 +13,16 @@ export default function loginReducer(state = {login: 'guest', loginButton : 'log
             loginButton: 'login'
         };
         case types.SAVE_TV_SHOW:
-        return {
-            ...state,
-            shows: state.shows.concat(action.show)
-        }
+        if (!state.shows.find(function (elt) { return elt.id === action.show.ids.trakt }))
+            return {
+                ...state,
+                shows: state.shows.concat({
+                    id:action.show.ids.trakt,
+                    value:action.show
+                })
+            }
+        else
+            return state;
         default:
         return state;
     }
