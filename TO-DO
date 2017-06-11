@@ -1,12 +1,12 @@
 ===== TO-DO =====
 
-[ ] Profil utilisateur avec statistiques (nombre de séries suivies, historique des derniers épisodes vus)
-[ ] Calendrier des séries personnalisé
+[x] Inscription/Connexion
 [x] Possibilité de rechercher une série
-[ ] Possibilité de faire des watchlist
-[ ] Progression des séries suivies
+[x] Possibilité de faire des watchlist
+[ ] Possibilité d'ajouter des séries dans les watchlist
 
 Bonus :
 
+[ ] Progression des séries suivies
 [ ] Historique des épisodes vus
 [ ] Liste d'amis (du coup possibilité de rechercher un utilisateur)

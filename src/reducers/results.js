@@ -1,6 +1,5 @@
 import * as types from '../types'
 
-
 const initState = {
     request: null,
     message: 'Nothing to show',

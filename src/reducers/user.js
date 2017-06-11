@@ -1,6 +1,7 @@
 import * as types from '../types';
 
 const initState = {
+    id: 0,
     login: '',
     loginButton : 'login',
     shows: [],
@@ -12,13 +13,16 @@ export default function loginReducer(state = initState, action) {
         case types.LOGIN:
         return {
             ...state,
+            id: action.id,
             login: action.login,
             loginButton: 'logout'
         };
         case types.LOGOUT:
         return {
             ...state,
+            id: 0,
             login: '',
+            watchlists: [],
             loginButton: 'login'
         };
         case types.SAVE_TV_SHOW:

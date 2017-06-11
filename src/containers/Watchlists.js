@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
+import { addWatchlist_util, fetchWatchlists } from '../actions/watchlist'
 
 class Watchlists extends Component {
     constructor(props) {
@@ -9,12 +11,21 @@ class Watchlists extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
+    componentWillMount() {
+        this.props.dispatch(fetchWatchlists(this.props.user_id))
+    }
+
     handleChange(event) {
         this.setState({ value : event.target.value });
     }
 
     addWatchlist(name) {
+        this.props.dispatch(addWatchlist_util(name, this.props.user_id));
+    }
 
+    renderWatchlists(watchlist) {
+        var link = '/watchlists?id=' + watchlist.id;
+        return <li key={ watchlist.id }><Link to={link}>{ watchlist.name }</Link></li>;
     }
 
     render() {
@@ -27,16 +38,26 @@ class Watchlists extends Component {
                 </label>
                 <button onClick={ () => this.addWatchlist(this.state.value) }>Add</button>
 
+                <h4>Your watchlists :</h4>
+                {   this.props.isFetching ?
+                    <h3>Loading</h3>
+                    :
+                    <ul>
+                    { this.props.watchlists.map(this.renderWatchlists) }
+                    </ul>
+                }
             </div>
         );
     }
 }
 
 function mapStateToProps(state) {
-    const { user } = state;
+    const { user, watchlist } = state;
 
     return {
-        watchlists: user.watchlists
+        user_id: user.id,
+        watchlists: watchlist.list,
+        isFetching: watchlist.isFetching
     }
 }
 

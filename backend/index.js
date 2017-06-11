@@ -32,7 +32,7 @@ app.post('/user', (req, res) => {
     connection.query("INSERT INTO `users` (login) VALUES (" + mysql.escape(login) + ")", (err, result) => {
     if (err)
             return res.status(500).send(err);
-    return res.sendStatus(200);
+    return res.status(200).send(JSON.stringify({ "id": result.insertId }));
     })
 });
 
@@ -54,6 +54,39 @@ app.get('/shows', (req, res) => {
         return res.status(200).send(result);
     })
 })
+
+app.get('/watchlistsByUserId', (req, res) => {
+    const { user } = req.query;
+    if (!user)
+        return res.sendStatus(500);
+    connection.query("SELECT * FROM `watchlists` WHERE user_id = " + user, (err, result) => {
+        if (err)
+            return res.status(500).send(err);
+        return res.status(200).send(result);
+    })
+})
+
+app.get('/watchlist', (req, res) => {
+    const { id } = req.query;
+    if (!id)
+        return res.sendStatus(500);
+    connection.query("SELECT * FROM `watchlists` WHERE id = " + id, (err, result) => {
+        if (err)
+            return res.status(500).send(err);
+        return res.status(200).send(result);
+    })
+})
+
+app.post('/watchlist', (req, res) => {
+    const { user_id, name } = req.body;
+    if (!(user_id && name))
+        return res.sendStatus(500);
+    connection.query("INSERT INTO `watchlists` (user_id, name) VALUES (" + user_id + ", " + mysql.escape(name) + ")", (err, result) => {
+    if (err)
+            return res.status(500).send(err);
+    return res.status(200).send(JSON.stringify({ "id": result.insertId }));
+    })
+});
 
 app.listen(4200, () => {
     console.log('Ex app listening on port 4200')

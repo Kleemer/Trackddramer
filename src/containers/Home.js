@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchLogin, logout, fetchNextSearchResults } from '../actions'
-
+import { fetchLogin, logout } from '../actions/login'
+import { fetchNextSearchResults } from '../actions/search'
 import Nav from '../components/Nav'
 
 class Home extends Component {

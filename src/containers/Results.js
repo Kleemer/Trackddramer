@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchPrevSearchResults, fetchNextSearchResults, saveShow } from '../actions'
+import { fetchPrevSearchResults, fetchNextSearchResults } from '../actions/search'
+import { saveShow } from '../actions/show'
 
 import SearchResult from '../components/SearchResult'
 

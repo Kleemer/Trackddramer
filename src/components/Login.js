@@ -15,14 +15,14 @@ export default class Nav extends Component {
     render() {
         return (
             <div>
-                <label>
-                    Login:
-                </label>
                 {
                 this.props.login === '' ?
-                <input type="text" value={this.state.value} onChange={this.handleChange} />
+                <label>
+                    Login:
+                    <input type="text" value={this.state.value} onChange={this.handleChange} />
+                </label>
                 :
-                this.props.login
+                <span> Welcome { this.props.login } </span>
                 }
                 <button onClick={ () => this.props.changeLoginValue(this.state.value) } > { this.props.loginButton }</button>
             </div>

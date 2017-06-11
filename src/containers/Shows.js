@@ -1,17 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchSpecificSearchResults } from '../actions'
+import { fetchSpecificSearchResults } from '../actions/search'
 
 class Shows extends Component {
 
     componentWillMount() {
-        console.log("avant")
         this.props.dispatch(fetchSpecificSearchResults(this.props.location.query.trakt))
-        console.log("apres")
     }
 
     renderSpecific() {
-        console.log(this.props.isFetching)
         if (this.props.isFetching)
             return (
                 <div>
