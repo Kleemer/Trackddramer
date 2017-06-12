@@ -15,24 +15,33 @@ import DevTools from './containers/DevTools'
 const store = configureStore()
 const history = syncHistoryWithStore(browserHistory, store)
 
-/*function checkAuth(nextState, replaceState) {
+function checkAuth(nextState, replaceState) {
+  console.log("check");
   let { user } = store.getState();
-  let loggedIn = user.login.length !== 0;
+  let loggedIn = user.id !== 0;
   // check if the path isn't dashboard
   // that way we can apply specific logic
   // to display/render the path we want to
-    if (!loggedIn)
-        replaceState(null, '/');
-}*/
+    if (!loggedIn) {
+      replaceState({
+        pathname: '/',
+        state: {
+          nextPathname: nextState.location.pathname,
+        },
+      })
+    }
+}
 
 render((
 <Provider store={store}>
   <div>
     <Router history={history} >
       <Route path="/" component={Home}>
-        <Route path="/shows" component={Shows} />
-        <Route path="/watchlists" component={Watchlists} />
         <Route path="/results" component={Results} />
+        <Route path="/shows" component={Shows} />
+        <Route onEnter={checkAuth}>
+          <Route path="/watchlists" component={Watchlists} />
+        </Route>
       </Route>
     </Router>
   <DevTools />
