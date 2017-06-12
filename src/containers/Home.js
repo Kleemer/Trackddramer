@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchLogin, logout } from '../actions/login'
+import { fetchLogin, logout_clean } from '../actions/login'
 import { fetchNextSearchResults } from '../actions/search'
 import Nav from '../components/Nav'
 
@@ -10,7 +10,7 @@ class Home extends Component {
         if (this.props.loginButton === 'login')
             this.props.dispatch(fetchLogin(login))
         else
-            this.props.dispatch(logout())
+            this.props.dispatch(logout_clean())
     }
 
     fetchSearch(text) {
@@ -31,6 +31,7 @@ function mapStateToProps(state) {
     const { user } = state;
 
     return {
+        id: user.id,
         login: user.login,
         loginButton: user.loginButton
     }

@@ -1,5 +1,6 @@
 import * as types from '../types'
 import { DB_ROOT } from './constants'
+import { fetchWatchlists, cleanWatchlists } from '../actions/watchlist'
 
 //Actions
 export function login(login, id) {
@@ -16,6 +17,10 @@ export function logout() {
   }
 }
 
+export const logout_clean = () => (dispatch) => {
+  dispatch(cleanWatchlists());
+  dispatch(logout);
+}
 
 //Utils functions
 export const addUser = (text) => {
@@ -41,5 +46,6 @@ export const fetchLogin = (text) => (dispatch) => {
       else
         id = results[0].id;
       dispatch(login(text, id));
+      dispatch(fetchWatchlists(id));
     })
 }
