@@ -17,10 +17,29 @@ export function fetchWatchlist() {
   }
 }
 
-export function fetchWatchlistSuccess(list) {
+export function fetchSpecificWatchlist() {
+  return {
+    type: types.FETCH_SPECIFIC_WATCHLIST
+  }
+}
+
+export function fetchWatchlistsSuccess(list) {
   return {
     type: types.FETCH_WATCHLISTS_SUCCESS,
     list: list
+  }
+}
+
+export function fetchSpecificWatchlistSuccess(infos, watchlist) {
+  return {
+    type: types.FETCH_SPECIFIC_WATCHLIST_SUCCESS,
+    watchlist: {infos, watchlist}
+  }
+}
+
+export function cleanWatchlists() {
+  return {
+    type: types.CLEAN_WATCHLISTS
   }
 }
 
@@ -29,7 +48,7 @@ export const fetchWatchlists = (user_id) => (dispatch) => {
   dispatch(fetchWatchlist());
   fetch(`${DB_ROOT}watchlistsByUserId?user=${user_id}`, { method: 'GET', headers: new Headers()})
     .then(raw => raw.json())
-    .then(tvshow => dispatch(fetchWatchlistSuccess(tvshow)))
+    .then(watchlist => dispatch(fetchWatchlistsSuccess(watchlist)))
 }
 
 export const addWatchlist_util = (text, id) => (dispatch) => {
@@ -43,4 +62,19 @@ export const addWatchlist_util = (text, id) => (dispatch) => {
   .then(function (result) {
       dispatch(addWatchlist(result.id, id, text));
   })
+}
+
+export const fetchSpecificWatchlistShows_util = (id, infos) => (dispatch) => {
+  fetch(`${DB_ROOT}watchlistContent?id=${id}`, { method: 'GET', headers: new Headers()})
+  .then(raw => raw.json())
+  .then(watchlist => dispatch(fetchSpecificWatchlistSuccess(infos, watchlist)))
+}
+
+export const fetchSpecificWatchlistInfos_util = (id) => (dispatch) => {
+  dispatch(fetchSpecificWatchlist());
+  fetch(`${DB_ROOT}watchlist?id=${id}`, { method: 'GET', headers: new Headers()})
+  .then(raw => raw.json())
+  .then(infos => {
+    dispatch(fetchSpecificWatchlistShows_util(id, infos))
+  });
 }

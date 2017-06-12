@@ -35,7 +35,6 @@ export const fetchLogin = (text) => (dispatch) => {
   fetch(`${DB_ROOT}user?login=${text}`, { method: 'GET', headers: new Headers()})
   .then(raw => raw.json())
   .then(function(results) {
-    console.log(results)
     let id;
       if (results.length === 0)
         id = addUser(text);

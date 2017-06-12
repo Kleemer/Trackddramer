@@ -22,7 +22,7 @@ class Results extends Component {
     render() {
         return (
             <div>
-                <SearchResult saveShow={(show) => this.saveShow(show)} page={this.props.page} payload={this.props.payload} message={this.props.message}/>
+                <SearchResult login={this.props.login} saveShow={(show) => this.saveShow(show)} page={this.props.page} payload={this.props.payload} message={this.props.message}/>
                 {this.props.page > 1 &&
                   <button onClick={() => this.fetchPrev()}>Previous page</button>
                 }                
@@ -35,9 +35,10 @@ class Results extends Component {
 }
 
 function mapStateToProps(state) {
-    const { results } = state;
+    const { user, results } = state;
 
     return {
+        login: user.login,
         page: results.page,
         payload: results.payload,
         message: results.message,

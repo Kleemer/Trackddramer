@@ -77,6 +77,17 @@ app.get('/watchlist', (req, res) => {
     })
 })
 
+app.get('/watchlistContent', (req, res) => {
+    const { id } = req.query;
+    if (!id)
+        return res.sendStatus(500);
+    connection.query("SELECT * FROM `watchlist_shows` WHERE watchlist_id = " + id, (err, result) => {
+        if (err)
+            return res.status(500).send(err);
+        return res.status(200).send(result);
+    })
+})
+
 app.post('/watchlist', (req, res) => {
     const { user_id, name } = req.body;
     if (!(user_id && name))

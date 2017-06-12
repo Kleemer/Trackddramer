@@ -16,7 +16,12 @@ export default class SearchResult extends Component {
 
     renderShow(show, index) {
         var link = '/shows?trakt=' + show.ids.trakt;
-        return <li key={ index }><button onClick={() => this.props.saveShow(show)} >Save</button> <Link to={link}>{ show.title }</Link></li>;
+        return <li key={ index }>
+            {
+                this.props.login &&
+                <button onClick={() => this.props.saveShow(show)} >Add to watchlist</button>
+            }
+            <Link to={link}>{ show.title }</Link></li>;
     }
 
 
