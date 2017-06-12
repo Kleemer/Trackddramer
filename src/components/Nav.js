@@ -17,18 +17,26 @@ export default class Nav extends Component {
 
     render() {
         return (
-            <div>
-                <Login login={this.props.login} changeLoginValue={(login) => this.props.changeLoginValue(login)} loginButton={this.props.loginButton}/>
-                <Link to="/">Home</Link>
-                { ' ' }
-                <Link to="/watchlists">Watchlists</Link>
-                { ' ' }
-                <label>
-                    Search:
-                    <input type="text" value={this.state.value} onChange={this.handleChange} />
-                </label>
-                <button onClick={ () => this.props.fetchSearch(this.state.value) }>Search</button>
-            </div>
+            <nav className="nav">
+                <div className="nav-left">
+                    <Link to="/" className="nav-item">Home</Link>
+                    { ' ' }
+                    <Link to="/watchlists" className="nav-item">Watchlists</Link>
+                    { ' ' }
+                </div>
+                <div className="nav-center">
+                    <span className="nav-item">
+                        <label>
+                            Search:
+                            <input type="text" value={this.state.value} onChange={this.handleChange} />
+                        </label>
+                        <button onClick={ () => this.props.fetchSearch(this.state.value) }>Search</button>
+                    </span>
+                </div>
+                <div className="nav-right">
+                    <Login login={this.props.login} changeLoginValue={(login) => this.props.changeLoginValue(login)} loginButton={this.props.loginButton}/>
+                </div>
+            </nav>
         );
     }
 }

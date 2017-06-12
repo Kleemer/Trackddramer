@@ -5,8 +5,8 @@ class Restricted extends Component {
 
     render() {
         return (
-            <div>
-                <h2>Access restricted, please login first</h2>
+            <div className="has-text-centered">
+                <h2 className="title">Access restricted, please login first</h2>
             </div>
         );
     }

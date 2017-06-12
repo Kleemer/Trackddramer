@@ -18,7 +18,7 @@ class Shows extends Component {
 
         let show = this.props.specific[0].show;
         return (
-            <div>
+            <div className="container has-text-centered">
                 <h4>Show : {show.title} ({show.year})</h4>
                 {show.overview}
             </div>

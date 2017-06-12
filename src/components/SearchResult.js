@@ -17,7 +17,12 @@ export default class SearchResult extends Component {
         });
     }
     renderMessage() {
-        return <h4> { this.props.message } </h4>;
+        let classMessage;
+        if (this.props.message === "Nothing to show" || this.props.message === "No results anymore")
+            classMessage = "title has-text-centered"
+        else
+            classMessage = "title"
+        return <h1 className={classMessage}> { this.props.message } </h1>
     }
 
     renderTVShows() {

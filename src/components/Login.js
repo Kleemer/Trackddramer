@@ -14,7 +14,7 @@ export default class Login extends Component {
 
     render() {
         return (
-            <span>
+            <div className="nav-item">
                 {
                 this.props.login === '' ?
                 <label>
@@ -25,7 +25,7 @@ export default class Login extends Component {
                 <span> Welcome { this.props.login } </span>
                 }
                 <button onClick={ () => this.props.changeLoginValue(this.state.value) } > { this.props.loginButton }</button>
-            </span>
+            </div>
         );
     }
 }

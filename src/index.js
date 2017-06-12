@@ -12,7 +12,7 @@ import Shows from './containers/Shows'
 import Watchlists from './containers/Watchlists'
 import Results from './containers/Results'
 import Restricted from './containers/Restricted'
-import DevTools from './containers/DevTools'
+//import DevTools from './containers/DevTools'
 
 const store = configureStore()
 const history = syncHistoryWithStore(browserHistory, store)
@@ -46,6 +46,5 @@ render((
         </Route>
       </Route>
     </Router>
-  <DevTools />
 </div>
 </Provider>), document.getElementById('root'))

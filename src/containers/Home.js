@@ -21,7 +21,11 @@ class Home extends Component {
         return (
             <div>
                 <Nav login={this.props.login} page={this.props.page} fetchSearch={ (text) => this.fetchSearch(text) } changeLoginValue={ (login) => this.changeLoginValue(login) } loginButton={this.props.loginButton}/>
-                {this.props.children}
+                <section className="hero is-light">
+                    <div className="hero-body">
+                        {this.props.children}
+                    </div>
+                </section>
             </div>
         );
     }

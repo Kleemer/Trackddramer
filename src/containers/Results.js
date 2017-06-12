@@ -21,7 +21,7 @@ class Results extends Component {
 
     render() {
         return (
-            <div>
+            <div className="container">
                 <SearchResult login={this.props.login} watchlists={this.props.watchlists} saveShow={(show, watchlist_id) => this.saveShow(show, watchlist_id)} page={this.props.page} payload={this.props.payload} message={this.props.message}/>
                 {this.props.page > 1 &&
                   <button onClick={() => this.fetchPrev()}>Previous page</button>
