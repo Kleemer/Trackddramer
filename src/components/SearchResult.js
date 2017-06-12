@@ -3,6 +3,19 @@ import { Link } from 'react-router'
 
 export default class SearchResult extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {value: 'Select watchlist'};
+
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(event) {
+        let name = event.target.name;
+        this.setState({
+            [name]: event.target.value
+        });
+    }
     renderMessage() {
         return <h4> { this.props.message } </h4>;
     }
@@ -14,12 +27,22 @@ export default class SearchResult extends Component {
         return rows;
     }
 
+    renderSelect(watchlist) {
+        return <option key={watchlist.id} value={watchlist.id}>{watchlist.name}</option>
+    }
+
     renderShow(show, index) {
         var link = '/shows?trakt=' + show.ids.trakt;
+        let name = show.ids.trakt;
         return <li key={ index }>
             {
                 this.props.login &&
-                <button onClick={() => this.props.saveShow(show)} >Add to watchlist</button>
+                <span>
+                    <button onClick={() =>this.props.saveShow(show, this.state[name]) } >Add</button>
+                    <select name={name} value={this.state.name} onChange={this.handleChange}>
+                        {this.props.watchlists.map(this.renderSelect)}
+                    </select>
+                </span>
             }
             <Link to={link}>{ show.title }</Link></li>;
     }

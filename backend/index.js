@@ -99,6 +99,17 @@ app.post('/watchlist', (req, res) => {
     })
 });
 
+app.post('/addshowtowatchlist', (req, res) => {
+    const { watchlist_id, show_id, show_name } = req.body;
+    if (!(watchlist_id && show_id && show_name))
+        return res.sendStatus(500);
+    connection.query("INSERT INTO `watchlist_shows` (watchlist_id, show_id, show_name) VALUES (" + watchlist_id + ", " + show_id + ", " + mysql.escape(show_name) + ")", (err, result) => {
+        if (err)
+            return res.status(500).send(err);
+    return res.status(200).send(JSON.stringify({ "id": result.insertId }));
+    })
+});
+
 app.listen(4200, () => {
     console.log('Ex app listening on port 4200')
 });

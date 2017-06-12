@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchPrevSearchResults, fetchNextSearchResults } from '../actions/search'
-import { saveShow } from '../actions/show'
+import { saveShow_util } from '../actions/show'
 
 import SearchResult from '../components/SearchResult'
 
@@ -15,14 +15,14 @@ class Results extends Component {
         this.props.dispatch(fetchNextSearchResults(this.props.page, this.props.request))
     }
 
-    saveShow(show) {
-        this.props.dispatch(saveShow(show))
+    saveShow(show, watchlist_id) {
+        this.props.dispatch(saveShow_util(show, watchlist_id))
     }
 
     render() {
         return (
             <div>
-                <SearchResult login={this.props.login} saveShow={(show) => this.saveShow(show)} page={this.props.page} payload={this.props.payload} message={this.props.message}/>
+                <SearchResult login={this.props.login} watchlists={this.props.watchlists} saveShow={(show, watchlist_id) => this.saveShow(show, watchlist_id)} page={this.props.page} payload={this.props.payload} message={this.props.message}/>
                 {this.props.page > 1 &&
                   <button onClick={() => this.fetchPrev()}>Previous page</button>
                 }                
@@ -35,10 +35,11 @@ class Results extends Component {
 }
 
 function mapStateToProps(state) {
-    const { user, results } = state;
+    const { user, watchlist, results } = state;
 
     return {
         login: user.login,
+        watchlists: watchlist.list,
         page: results.page,
         payload: results.payload,
         message: results.message,
