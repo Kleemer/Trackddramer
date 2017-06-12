@@ -14,7 +14,7 @@ export default class Nav extends Component {
 
     render() {
         return (
-            <div>
+            <span>
                 {
                 this.props.login === '' ?
                 <label>
@@ -25,7 +25,7 @@ export default class Nav extends Component {
                 <span> Welcome { this.props.login } </span>
                 }
                 <button onClick={ () => this.props.changeLoginValue(this.state.value) } > { this.props.loginButton }</button>
-            </div>
+            </span>
         );
     }
 }

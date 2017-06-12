@@ -48,7 +48,6 @@ export default function watchlistReducer (state = initState, action) {
             ...state,
             isFetching: true,
             isFetchingSpecific: true,
-            list: [],
             specific: null
         }
         default:

@@ -19,7 +19,7 @@ export function logout() {
 
 export const logout_clean = () => (dispatch) => {
   dispatch(cleanWatchlists());
-  dispatch(logout);
+  dispatch(logout());
 }
 
 //Utils functions
