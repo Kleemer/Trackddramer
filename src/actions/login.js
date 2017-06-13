@@ -1,5 +1,6 @@
 import * as types from '../types'
 import { DB_ROOT } from './constants'
+import { browserHistory } from 'react-router'
 import { fetchWatchlists, cleanWatchlists } from '../actions/watchlist'
 
 //Actions
@@ -20,6 +21,7 @@ export function logout() {
 export const logout_clean = () => (dispatch) => {
   dispatch(cleanWatchlists());
   dispatch(logout());
+  browserHistory.push('/');  
 }
 
 //Utils functions
@@ -40,12 +42,13 @@ export const fetchLogin = (text) => (dispatch) => {
   fetch(`${DB_ROOT}user?login=${text}`, { method: 'GET', headers: new Headers()})
   .then(raw => raw.json())
   .then(function(results) {
-    let id;
+      let id;
       if (results.length === 0)
-        id = addUser(text);
+          id = addUser(text);
       else
-        id = results[0].id;
+          id = results[0].id;
       dispatch(login(text, id));
       dispatch(fetchWatchlists(id));
+      browserHistory.push('/');  
     })
 }

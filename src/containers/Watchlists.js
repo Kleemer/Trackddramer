@@ -29,12 +29,15 @@ class Watchlists extends Component {
 
     renderWatchlists(watchlist) {
         var link = '/watchlists?id=' + watchlist.id;
-        return <li key={ watchlist.id }><Link to={link}>{ watchlist.name }</Link></li>;
+        return <tr key={ watchlist.id }><td><Link to={link}>{ watchlist.name }</Link></td></tr>;
     }
 
     renderShow(show, index) {
         var link = '/shows?trakt=' + show.show_id;
-        return <li key={ index }><button>Remove</button> <Link to={link}>{ show.show_name }</Link></li>;
+        return <tr>
+        <td key={ index }><button>Remove</button></td>
+        <td><Link to={link}>{ show.show_name }</Link></td>
+        </tr>;
     }
 
     renderSpecific() {
@@ -49,35 +52,51 @@ class Watchlists extends Component {
         let watchlist = this.props.specific;
         return (
             <div>
-                <h4>{watchlist.name}</h4>
-                {watchlist.shows.map(this.renderShow, this)}
+                <h2><strong>{watchlist.name}</strong></h2>
+                <table className="table is-bordered is-striped">
+                    <thead>
+                        <th>Remove</th>
+                        <th>Show</th>
+                    </thead>
+                    <tbody>
+                        {watchlist.shows.map(this.renderShow, this)}
+                    </tbody>
+                </table>
             </div>
         )
     }
 
     render() {
         return (
-            <div>
-                <h4>Watchlists</h4>
+            <div className="container">
+                <h4 className="title">Watchlists</h4>
                 {
                     this.props.location.query.id ?
                     this.renderSpecific()
                     :
                     <span>
+                        <div>
                         <label>
-                            Create new watchlist: 
+                            Create new watchlist : 
                             <input type="text" value={this.state.value} onChange={this.handleChange} />
                         </label>
                         <button onClick={ () => this.addWatchlist(this.state.value) }>Add</button>
-
-                        <h4>Your watchlists :</h4>
+                        </div>
+                        <div>
+                        <h2><strong>Your watchlists</strong></h2>
                         {   this.props.isFetching ?
                             <h3>Loading</h3>
                             :
-                            <ul>
-                            { this.props.watchlists.map(this.renderWatchlists) }
-                            </ul>
+                            <table className="table is-bordered is-striped">
+                                <thead>
+                                    <th>Name</th>
+                                </thead>
+                                <tbody>
+                                    { this.props.watchlists.map(this.renderWatchlists) }
+                                </tbody>
+                            </table>
                         }
+                        </div>
                     </span>
                 }
             </div>

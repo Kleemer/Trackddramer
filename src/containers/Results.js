@@ -24,10 +24,10 @@ class Results extends Component {
             <div className="container">
                 <SearchResult login={this.props.login} watchlists={this.props.watchlists} saveShow={(show, watchlist_id) => this.saveShow(show, watchlist_id)} page={this.props.page} payload={this.props.payload} message={this.props.message}/>
                 {this.props.page > 1 &&
-                  <button onClick={() => this.fetchPrev()}>Previous page</button>
+                  <button className="pagination-previous" onClick={() => this.fetchPrev()}>Previous page</button>
                 }                
                 {this.props.page > 0 && this.props.message !== 'No results anymore' &&
-                  <button onClick={() => this.fetchNext()}>Next page</button>
+                  <button className="pagination-next" onClick={() => this.fetchNext()}>Next page</button>
                 }
             </div>
         );

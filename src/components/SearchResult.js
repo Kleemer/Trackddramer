@@ -39,17 +39,22 @@ export default class SearchResult extends Component {
     renderShow(show, index) {
         var link = '/shows?trakt=' + show.ids.trakt;
         let name = show.ids.trakt;
-        return <li key={ index }>
+        return <tr key={ index }>
             {
                 this.props.login &&
-                <span>
-                    <button onClick={() =>this.props.saveShow(show, this.state[name]) } >Add</button>
+                <td>
+                    <button className="button" onClick={() =>this.props.saveShow(show, this.state[name]) } >Add</button>
+                    <span className="select">
                     <select name={name} value={this.state.name} onChange={this.handleChange}>
                         {this.props.watchlists.map(this.renderSelect)}
                     </select>
-                </span>
+                    </span>
+                </td>
             }
-            <Link to={link}>{ show.title }</Link></li>;
+            <td>
+            <Link to={link}>{ show.title }</Link>
+            </td>
+            </tr>;
     }
 
 
@@ -59,12 +64,20 @@ export default class SearchResult extends Component {
                 {
                     this.renderMessage()
                 }
-                <p>Page : { this.props.page }</p>
-                <ul>
-                {
-                    this.renderTVShows().map(this.renderShow, this)
-                }
-                </ul>
+                <p className="">Page : <strong>{ this.props.page }</strong></p>
+                <table className="table is-striped">
+                    <thead>
+                        {this.props.login &&
+                            <th>Watchlist</th>
+                        }
+                        <th>Title</th>
+                    </thead>
+                    <tbody>
+                    {
+                        this.renderTVShows().map(this.renderShow, this)
+                    }
+                    </tbody>
+                </table>
             </div>
         );
     }

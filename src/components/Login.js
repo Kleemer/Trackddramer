@@ -22,7 +22,7 @@ export default class Login extends Component {
                     <input type="text" value={this.state.value} onChange={this.handleChange} />
                 </label>
                 :
-                <span> Welcome { this.props.login } </span>
+                <span> Welcome { this.props.login } !</span>
                 }
                 <button onClick={ () => this.props.changeLoginValue(this.state.value) } > { this.props.loginButton }</button>
             </div>
