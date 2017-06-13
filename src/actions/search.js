@@ -2,6 +2,12 @@ import * as types from '../types'
 import { browserHistory } from 'react-router'
 import { API_KEY, API_ROOT } from './constants'
 
+export function cleanShow() {
+  return {
+    type: types.CLEAN_TV_SHOW
+  }
+}
+
 export function fetchSearchSpecificRequest() {
   return {
     type: types.FETCH_SEARCH_SPECIFIC_REQUEST,
@@ -76,6 +82,7 @@ export const fetchPrevSearchResults = (page, text) => (dispatch) => {
 }
 
 export const fetchNextSearchResults = (page, text, isPrev) => (dispatch) => {
+  dispatch(cleanShow());
   browserHistory.push('/results');  
   dispatch(fetchSearchRequest(text));
   fetch(`${API_ROOT}search/show?query=${text.replace(/ /g,"+")}&page=${page + 1}&limit=10&extended=full`, { method: 'GET', headers: new Headers({

@@ -43,9 +43,10 @@ export default class SearchResult extends Component {
             {
                 this.props.login &&
                 <td>
-                    <button className="button" onClick={() =>this.props.saveShow(show, this.state[name]) } >Add</button>
+                    <button className="button" onClick={() => {console.log("debug: "); console.log(this.state); this.props.saveShow(show, this.state[name])} } >Add</button>
                     <span className="select">
                     <select name={name} value={this.state.name} onChange={this.handleChange}>
+                        <option>{this.state.value}</option>
                         {this.props.watchlists.map(this.renderSelect)}
                     </select>
                     </span>

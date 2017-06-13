@@ -10,6 +10,12 @@ const initState = {
 
 export default function resultsReducer (state = initState, action) {
     switch (action.type) {
+        case types.CLEAN_TV_SHOW:
+        return {
+            ...state,
+            request: null,
+            page: 0
+        }
         case types.FETCH_SEARCH_REQUEST:
         var newPage = state.request === action.request ? state.page : 0;
         return {

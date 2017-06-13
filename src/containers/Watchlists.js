@@ -90,7 +90,8 @@ class Watchlists extends Component {
                                     <th>Name</th>
                                 </thead>
                                 <tbody>
-                                    { this.props.watchlists.map(this.renderWatchlists) }
+                                    { this.props.watchlists &&
+                                        this.props.watchlists.map(this.renderWatchlists) }
                                 </tbody>
                             </table>
                         }

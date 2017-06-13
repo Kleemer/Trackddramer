@@ -15,6 +15,8 @@ export function saveShow(show) {
 }
 
 export const saveShow_util = (show, watchlist_id) => (dispatch) => {
+  console.log(show);
+  console.log(watchlist_id);
   let bodyUser = {watchlist_id: watchlist_id, show_id: show.ids.trakt, show_name: show.title}
   fetch(`${DB_ROOT}addshowtowatchlist`,
         { method: 'POST', headers: new Headers({"Content-Type": "application/json"}) 
