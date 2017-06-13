@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchPrevTrending, fetchNextTrending } from '../actions/search'
+import { cleanShow, fetchPrevTrending, fetchNextTrending } from '../actions/search'
 import { saveShow_util } from '../actions/show'
 
 import SearchResult from '../components/SearchResult'
@@ -8,6 +8,7 @@ import SearchResult from '../components/SearchResult'
 class Trending extends Component {
 
     componentWillMount() {
+        this.props.dispatch(cleanShow());
         this.fetchNext();
     }
 

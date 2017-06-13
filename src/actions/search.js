@@ -30,9 +30,23 @@ export function fetchSearchNext(tvshows) {
   }
 }
 
+export function fetchSearchNextTrending(tvshows) {
+  return {
+    type: types.FETCH_SEARCH_NEXT_TRENDING,
+    payload: tvshows
+  }
+}
+
 export function fetchSearchPrev(tvshows) {
   return {
     type: types.FETCH_SEARCH_PREV,
+    payload: tvshows
+  }
+}
+
+export function fetchSearchPrevTrending(tvshows) {
+  return {
+    type: types.FETCH_SEARCH_PREV_TRENDING,
     payload: tvshows
   }
 }
@@ -92,14 +106,13 @@ export const fetchPrevTrending = (page, text) => (dispatch) => {
      )
     .then(raw => raw.json())
     .then(function(tvshows) {
-      tvshows.length > 0 ? dispatch(fetchSearchPrev(tvshows))
+      tvshows.length > 0 ? dispatch(fetchSearchPrevTrending(tvshows))
       :
       dispatch(fetchSearchFail())
     })
 }
 
 export const fetchNextSearchResults = (page, text, isPrev) => (dispatch) => {
-  dispatch(cleanShow());
   browserHistory.push('/results');  
   dispatch(fetchSearchRequest(text));
   fetch(`${API_ROOT}search/show?query=${text.replace(/ /g,"+")}&page=${page + 1}&limit=10&extended=full`, { method: 'GET', headers: new Headers({
@@ -124,7 +137,7 @@ export const fetchNextTrending = (page, text) => (dispatch) => {
      )
     .then(raw => raw.json())
     .then(function(tvshows) {
-      tvshows.length > 0 ? dispatch(fetchSearchNext(tvshows))
+      tvshows.length > 0 ? dispatch(fetchSearchNextTrending(tvshows))
       :
       dispatch(fetchSearchFail())
     })

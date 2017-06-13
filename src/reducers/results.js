@@ -47,6 +47,23 @@ export default function resultsReducer (state = initState, action) {
             isFetching: false
 
         }
+        case types.FETCH_SEARCH_NEXT_TRENDING:
+        return {
+            ...state,
+            page: state.page + 1,
+            message: 'Trending shows',
+            payload: action.payload,
+            isFetching: false
+        }
+        case types.FETCH_SEARCH_PREV_TRENDING:
+        return {
+            ...state,
+            page: state.page - 1,
+            message: 'Trending show',
+            payload: action.payload,
+            isFetching: false
+
+        }
         case types.FETCH_SEARCH_SPECIFIC:
         return {
             ...state,

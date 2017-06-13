@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchPrevSearchResults, fetchNextSearchResults } from '../actions/search'
+import { fetchPrevSearchResults, fetchNextSearchResults, cleanShow } from '../actions/search'
 import { saveShow_util } from '../actions/show'
 
 import SearchResult from '../components/SearchResult'
 
 class Results extends Component {
+
+    componentWillMount() {
+        this.props.dispatch(cleanShow())
+    }
 
     fetchPrev() {
         this.props.dispatch(fetchPrevSearchResults(this.props.page, this.props.request))

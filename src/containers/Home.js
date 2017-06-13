@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchLogin, logout_clean } from '../actions/login'
-import { fetchNextSearchResults } from '../actions/search'
+import { cleanShow, fetchNextSearchResults } from '../actions/search'
 import Nav from '../components/Nav'
 import Trending from '../components/Trending'
 
@@ -15,6 +15,7 @@ class Home extends Component {
     }
 
     fetchSearch(text) {
+        this.props.dispatch(cleanShow())
         this.props.dispatch(fetchNextSearchResults(this.props.page, text))
     }
 
