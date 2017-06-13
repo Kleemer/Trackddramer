@@ -81,6 +81,23 @@ export const fetchPrevSearchResults = (page, text) => (dispatch) => {
     })
 }
 
+export const fetchPrevTrending = (page, text) => (dispatch) => {
+  dispatch(fetchSearchRequest(text));
+  fetch(`${API_ROOT}shows/trending?page=${page - 1}&limit=10&extended=full`, { method: 'GET', headers: new Headers({
+                                                               "Content-Type": "application/json",
+                                                               "trakt-api-version": 2,
+                                                               "trakt-api-key": API_KEY,
+                                                              })
+                                                            }
+     )
+    .then(raw => raw.json())
+    .then(function(tvshows) {
+      tvshows.length > 0 ? dispatch(fetchSearchPrev(tvshows))
+      :
+      dispatch(fetchSearchFail())
+    })
+}
+
 export const fetchNextSearchResults = (page, text, isPrev) => (dispatch) => {
   dispatch(cleanShow());
   browserHistory.push('/results');  
@@ -94,4 +111,21 @@ export const fetchNextSearchResults = (page, text, isPrev) => (dispatch) => {
      )
     .then(raw => raw.json())
     .then(tvshows => tvshows.length > 0 ? dispatch(fetchSearchNext(tvshows)) : dispatch(fetchSearchFail()))
+}
+
+export const fetchNextTrending = (page, text) => (dispatch) => {
+  dispatch(fetchSearchRequest(text));
+  fetch(`${API_ROOT}shows/trending?page=${page + 1}&limit=10&extended=full`, { method: 'GET', headers: new Headers({
+                                                               "Content-Type": "application/json",
+                                                               "trakt-api-version": 2,
+                                                               "trakt-api-key": API_KEY,
+                                                              })
+                                                            }
+     )
+    .then(raw => raw.json())
+    .then(function(tvshows) {
+      tvshows.length > 0 ? dispatch(fetchSearchNext(tvshows))
+      :
+      dispatch(fetchSearchFail())
+    })
 }

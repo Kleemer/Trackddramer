@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { fetchLogin, logout_clean } from '../actions/login'
 import { fetchNextSearchResults } from '../actions/search'
 import Nav from '../components/Nav'
+import Trending from '../components/Trending'
 
 class Home extends Component {
 
@@ -24,7 +25,10 @@ class Home extends Component {
                 <section className="hero is-light">
                     <div className="hero-body">
                         {
+                            this.props.children ?
                             this.props.children
+                            :
+                            <Trending/>
                         }
                     </div>
                 </section>
