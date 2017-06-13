@@ -35,7 +35,6 @@ class Watchlists extends Component {
     renderShow(show, index) {
         var link = '/shows?trakt=' + show.show_id;
         return <tr>
-        <td key={ index }><button>Remove</button></td>
         <td><Link to={link}>{ show.show_name }</Link></td>
         </tr>;
     }
@@ -55,7 +54,6 @@ class Watchlists extends Component {
                 <h2><strong>{watchlist.name}</strong></h2>
                 <table className="table is-bordered is-striped">
                     <thead>
-                        <th>Remove</th>
                         <th>Show</th>
                     </thead>
                     <tbody>
